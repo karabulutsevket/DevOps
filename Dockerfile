@@ -1,11 +1,15 @@
-FROM python:3.10-slim
+# Python tabanlı bir imaj seçin
+FROM python:3.11.4
 
+# Çalışma dizinini ayarlayın
 WORKDIR /app
 
-COPY requirements.txt ./
-
+# Gerekli Python paketlerini yükleyin
+COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-COPY merhaba.py ./
+# Uygulama kodunu kopyalayın
+COPY app.py .
 
-CMD ["python", "merhaba.py"]
+# Uygulamayı çalıştırmak için komut belirtin
+CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0"]
