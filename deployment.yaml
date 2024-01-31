@@ -2,6 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: app
+  namespace: default
+  labels:
+    app: app
 spec:
   replicas: 3
   selector:
@@ -13,7 +16,22 @@ spec:
         app: app
     spec:
       containers:
-      - name: app
-        image: gcr.io/numeric-hall-411518/app:latest
+      - name: project
+        image: mirrotech/app:latest
         ports:
         - containerPort: 5000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app
+  namespace: default
+spec:
+  selector:
+    app: app
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 5000
+  type: LoadBalancer
