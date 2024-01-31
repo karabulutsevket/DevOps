@@ -16,4 +16,4 @@ spec:
       - name: app
         image: gcr.io/numeric-hall-411518/app:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 5000
