@@ -1,37 +1,37 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app
-  namespace: default
-  labels:
-    app: app
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: app
-  template:
-    metadata:
-      labels:
+    name: app
+    namespace: default
+    labels:
         app: app
-    spec:
-      containers:
-      - name: project
-        image: mirrotech/app:latest
-        ports:
-        - containerPort: 5000
+spec:
+    replicas: 3
+    selector:
+        matchLabels:
+            app: app
+    template:
+        metadata:
+            labels:
+                app: app
+        spec:
+            containers:
+                - name: app
+                  image: mirrotech/app:latest
+                  ports:
+                      - containerPort: 5000
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: app
-  namespace: default
+    name: nobel-api-service
+    namespace: default
 spec:
-  selector:
-    app: app
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 5000
-  type: LoadBalancer
+    selector:
+        app: app
+    ports:
+        - protocol: TCP
+          port: 5000
+          targetPort: 5000
+    type: LoadBalancer
