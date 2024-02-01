@@ -1,15 +1,18 @@
-# Python tabanlı bir imaj seçin
-FROM python:3.13.0a3
+FROM python:3.11.3-slim-buster
 
-# Çalışma dizinini ayarlayın
+# set work directory
 WORKDIR /usr/src/app
 
-# Gerekli Python paketlerini yükleyin
-COPY requirements.txt .
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# install dependencies
+RUN pip install --upgrade pip
+COPY ./requirements.txt /usr/src/app/requirements.txt
 RUN pip install -r requirements.txt
 
-# Uygulama kodunu kopyalayın
-COPY main.py .
+# copy project
+COPY . /usr/src/app/
 
-# Uygulamayı çalıştırmak için komut belirtin
-CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0"]
+CMD ["python", "main.py"]
