@@ -1,6 +1,6 @@
 grafana:
   adminUser: admin
-  adminPassword: prom-operator
+  adminPassword: password
 
   ingress:
     enabled: true
@@ -23,6 +23,6 @@ grafana:
     smtp:
        enabled: true
        host: smtp.gmail.com:587
-       user: "user@gmail.com"
-       password: "pass"
+       user: "sevket.karabulut110@gmail.com"
+       password: "admin"
        skip_verify: true
